@@ -11,19 +11,19 @@ pipeline {
         }
         stage('Push Image') {
             steps {
-                sh '
+                sh '''
                     dockerpath=austinmeyer/udacity_aws_cloud_devops_capstone
                     docker login -u austinmeyer --password $DockerPassword
                     docker tag udacity_aws_cloud_devops_capstone $dockerpath
-                    '
+                    '''
             }
         }
         stage('Deploy to AWS EKS') {
             steps {
                 withAWS(region: 'us-west-2', credentials: 'AWSCLICredentials'){
-                    sh '
+                    sh '''
                         aws s3 ls
-                    '
+                       '''
             }
         }
     }
