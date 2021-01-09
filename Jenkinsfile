@@ -9,6 +9,12 @@ pipeline {
                 }    
             }
         }
+    stage('Build Docker Image') {
+            steps {
+                sh 'docker build --tag=udacity_aws_cloud_devops_capstone .'
+            }
+        }
+
         stage('Push Image') {
             steps {
                 sh '''
