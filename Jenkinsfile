@@ -24,16 +24,19 @@ pipeline {
                     '''
             }
         }
-        stage('Deploy to AWS EKS') {
+        stage('Config AWS EKS') {
             steps {
                 withAWS(region: 'us-west-2', credentials: 'AWSCLICredentials'){
                     sh '''
                         apk add --no-cache python3 py3-pip
                         python3 -m pip install awscli
-                        aws s3 ls
+                        aws eks \
+                        --region us-west-2 update-kubeconfig \
+                        --name Kubernetes-Capstone
                        '''
+                }
             }
         }
-    }
+        
     }
 }
