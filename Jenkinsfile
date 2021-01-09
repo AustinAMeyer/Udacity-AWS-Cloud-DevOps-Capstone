@@ -28,6 +28,7 @@ pipeline {
             steps {
                 withAWS(region: 'us-west-2', credentials: 'AWSCLICredentials'){
                     sh '''
+                        python3 -m pip install awscli
                         aws s3 ls
                        '''
             }
