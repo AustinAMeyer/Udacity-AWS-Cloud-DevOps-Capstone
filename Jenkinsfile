@@ -8,6 +8,8 @@ pipeline {
                         sh '''
                             apk add --no-cache python3 py3-pip
                             python3 -m pip install awscli
+                            curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+                            chmod +x ./kubectl
                         '''
                     }    
                 }
