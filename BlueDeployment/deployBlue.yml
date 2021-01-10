@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Kubernetes-Capstone-blue
+  name: kubernetes-capstone-blue
 
 spec:
   replicas: 2
@@ -14,7 +14,7 @@ spec:
         app: web
     spec:
       containers:
-        - name: Kubernetes-Capstone-blue
+        - name: kubernetes-capstone-blue
           image: austinmeyer/udacity_aws_cloud_devops_capstone_blue
           imagePullPolicy: "Always"
           ports:

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Kubernetes-Capstone-green
+  name: kubernetes-capstone-green
 
 spec:
   replicas: 2
@@ -14,7 +14,7 @@ spec:
         app: web
     spec:
       containers:
-        - name: Kubernetes-Capstone-green
+        - name: kubernetes-capstone-green
           image: austinmeyer/udacity_aws_cloud_devops_capstone_green
           imagePullPolicy: "Always"
           ports:
