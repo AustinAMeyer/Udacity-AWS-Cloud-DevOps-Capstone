@@ -7,11 +7,11 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: web
+      app: kubernetes-capstone-green
   template:
     metadata:
       labels:
-        app: web
+        app: kubernetes-capstone-green
     spec:
       containers:
         - name: kubernetes-capstone-green

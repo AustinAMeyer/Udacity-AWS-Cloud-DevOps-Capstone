@@ -72,6 +72,7 @@ pipeline {
                     kubectl get nodes
                     kubectl get deployment
                     kubectl get pod -o wide
+                    kubectl get services
                    '''
                 }
             }
@@ -130,6 +131,7 @@ pipeline {
                         if ["$MoveToProduction" == "True"]
                         then
                             kubectl apply -f ./Green/serviceGreen.yaml
+                            kubectl get services
                         else
                             echo "It is not time to move to production yet"
                         fi
