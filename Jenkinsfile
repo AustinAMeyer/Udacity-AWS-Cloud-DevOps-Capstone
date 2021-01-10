@@ -1,5 +1,6 @@
 pipeline {
-    agent any                 
+    agent any
+
     stages {
         stage('install requirements') {
                 steps {
@@ -36,7 +37,7 @@ pipeline {
                     '''
                 }
             }
-        stage('Push Image') {
+        stage('Push Blue Image') {
             steps {
                 sh '''
                     dockerpath=austinmeyer/udacity_aws_cloud_devops_capstone_blue
@@ -81,7 +82,7 @@ pipeline {
             }
         }
 
-        stage('Push Image') {
+        stage('Push Green Image') {
             steps {
                 sh '''
                     dockerpath=austinmeyer/udacity_aws_cloud_devops_capstone_green
@@ -90,7 +91,7 @@ pipeline {
                     '''
             }
         }
-        stage('Config AWS EKS') {
+        stage('Config AWS EKS for green') {
             steps {
                 withAWS(region: 'us-west-2', credentials: 'AWSCLICredentials'){
                     sh '''
@@ -113,7 +114,7 @@ pipeline {
                 }
             }
         }
-        stage('Switch Traffic To Green Deployment'){
+        stage('Switch Traffic To Green Deployment from blue'){
             steps{
                 withAWS(region: 'us-west-2', credentials: 'AWSCLICredentials'){
                     sh '''
