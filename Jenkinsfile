@@ -71,6 +71,7 @@ pipeline {
                     kubectl apply -f ./BlueDeployment/serviceBlue.yml
                     kubectl get nodes
                     kubectl get deployment
+                    kubectl get pod -o wide
                    '''
                 }
             }
@@ -117,6 +118,7 @@ pipeline {
                     kubectl apply -f ./GreenDeployment/deployGreen.yml
                     kubectl get nodes
                     kubectl get deployment
+                    kubectl get pod -o wide
                    '''
                 }
             }
