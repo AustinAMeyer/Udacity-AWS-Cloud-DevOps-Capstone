@@ -69,6 +69,8 @@ pipeline {
                     kubectl config use-context arn:aws:eks:us-west-2:257587651812:cluster/Kubernetes-Capstone
                     kubectl apply -f ./BlueDeployment/deployBlue.yml
                     kubectl apply -f ./BlueDeployment/serviceBlue.yml
+                    kubectl get nodes
+                    kubectl get deployment
                    '''
                 }
             }
@@ -113,6 +115,8 @@ pipeline {
                     --name Kubernetes-Capstone
                     kubectl config use-context arn:aws:eks:us-west-2:257587651812:cluster/Kubernetes-Capstone
                     kubectl apply -f ./GreenDeployment/deployGreen.yml
+                    kubectl get nodes
+                    kubectl get deployment
                    '''
                 }
             }
