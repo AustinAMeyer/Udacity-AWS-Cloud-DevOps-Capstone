@@ -35,7 +35,7 @@ pipeline {
                         #docker rmi austinmeyer/udacity-devops-capstone-blue
                         #Kills off services that are left over
                         #cleans out the nodes for failed attempts
-                        ARRAY=(`kubectl get pods -o wide | grep <nodename>`)
+                        ARRAY=`kubectl get pods -o wide | grep <nodename>`
                         for i in "${ARRAY}"
                         kubectl drain $i
                         done
