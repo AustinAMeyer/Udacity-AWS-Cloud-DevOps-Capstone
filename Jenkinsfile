@@ -34,7 +34,7 @@ pipeline {
                     sh 'docker rmi austinmeyer/udacity-devops-capstone-blue'
                 }
             }
-        stage('Clean Up Blue Image') {
+        stage('Clean Up Green Image') {
                 steps { 
                     sh 'docker rmi austinmeyer/udacity-devops-capstone-green'
                 }
