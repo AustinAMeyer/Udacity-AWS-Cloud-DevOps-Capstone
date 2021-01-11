@@ -11,31 +11,44 @@ pipeline {
                             curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
                             chmod +x ./kubectl
                             mv ./kubectl /usr/local/bin/kubectl
+                            pip install pylint
                         '''
                     }    
                 }
             }   
         stage('Lint Blue Deployment Dockerfile') {
-                steps {
-                    script {
-                       '''
-                       hadolint ./BlueDeployment/Dockerfile
-                       exit \$(docker wait ${container.id})
-                       '''
+            docker {
+               image 'hadolint/hadolint:latest-debian'
                     }
                 }
-            }
+                steps {
+                    sh '''
+                        hadolint ./BlueDeployment/Dockerfile | tee -a docker_lint.txt
+                        checkLint=`stat --printf="%s"  docker_lint.txt`
+                                
+                        if [ "$checkLint" -gexit "0" ]; then
+                            echo "Error exiting the workflow"
+                            exit 1
+                        else
+                            echo "Dockerfile is free of errors. Moving on to the next step"
+                        fi
+                        hadolint ./BlueDeployment/Dockerfile 
+                       '''
+                }
+                    }
         stage('Lint Green Deployment Dockerfile') {
                 steps {
                     script {
                         '''
-                       if [hadolint ./GreenDeployment/Dockerfile | grep -q "ERROR: script returned exit code 1"]
-                       then
-                        echo "Lint failed"
-                        exit 1
-                       else
-                        echo "pass"
-                       fi
+                       hadolint ./GreenDeployment/Dockerfile | tee -a docker_lint.txt
+                        checkLint=`stat --printf="%s"  docker_lint.txt`
+                                
+                        if [ "$checkLint" -gexit "0" ]; then
+                            echo "Error exiting the workflow"
+                            exit 1
+                        else
+                            echo "Dockerfile is free of errors. Moving on to the next step"
+                        fi
                        hadolint ./GreenDeployment/Dockerfile
                        '''
                     }    
