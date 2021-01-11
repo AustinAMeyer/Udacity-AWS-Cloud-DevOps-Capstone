@@ -22,7 +22,7 @@ pipeline {
                        LINT=`hadolint ./BlueDeployment/Dockerfile`
                        
 
-                       if LINT | grep -q "ERROR: script returned exit code 1"
+                       if $LINT | grep -q "ERROR: script returned exit code 1"
                        then
                         echo "Lint failed"
                         exit 1
@@ -41,7 +41,7 @@ pipeline {
                        LINT=`hadolint ./GreenDeployment/Dockerfile`
                        
 
-                       if LINT | grep -q "ERROR: script returned exit code 1"
+                       if $LINT | grep -q "ERROR: script returned exit code 1"
                        then
                         echo "Lint failed"
                         exit 1
