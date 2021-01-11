@@ -19,14 +19,8 @@ pipeline {
                 steps {
                     script {
                        '''
-                       if ["hadolint ./BlueDeployment/Dockerfile | grep -q "ERROR: script returned exit code 1""]
-                       then
-                        echo "Lint failed"
-                        exit 1
-                       else
-                        echo "pass"
-                       fi
                        hadolint ./BlueDeployment/Dockerfile
+                       exit \$(docker wait ${container.id})
                        '''
                     }
                 }
