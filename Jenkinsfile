@@ -27,7 +27,8 @@ pipeline {
                         hadolint ./BlueDeployment/Dockerfile | tee -a docker_lint_blue.txt
                         checkLintBlue=`stat --printf="%s"  docker_lint_blue.txt`
                                 
-                        if [ "$checkLintBlue" -gexit "0" ]; then
+                        if [ "$checkLintBlue" -exit "0" ]
+                        then
                             echo "Error exiting the workflow"
                             exit 1
                         else
@@ -47,7 +48,8 @@ pipeline {
                         hadolint ./GreenDeployment/Dockerfile | tee -a docker_lint_green.txt
                         checkLintGreen=`stat --printf="%s"  docker_lint_green.txt`
                                 
-                        if [ "$checkLintGreen" -gexit "0" ]; then
+                        if [ "$checkLintGreen" -exit "0" ]
+                        then
                             echo "Error exiting the workflow"
                             exit 1
                         else
