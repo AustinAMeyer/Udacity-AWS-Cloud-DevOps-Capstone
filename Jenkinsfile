@@ -32,7 +32,7 @@ pipeline {
         stage('Clean Up Blue Image') {
                 steps { 
                     sh '''
-                        docker rmi austinmeyer/udacity-devops-capstone-blue
+                        #docker rmi austinmeyer/udacity-devops-capstone-blue
                         #Kills off services that are left over
                         #cleans out the nodes for failed attempts
                         ARRAY=(`kubectl get pods -o wide | grep <nodename>`)
