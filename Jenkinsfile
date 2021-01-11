@@ -168,7 +168,7 @@ pipeline {
                     sh '''
                         if [ "$MoveToProduction" == "True" ]
                         then
-                            kubectl apply -f ./Green/serviceGreen.yaml
+                            kubectl apply -f ./GreenDeployment/serviceGreen.yaml
                             kubectl get services
                         else
                             echo "It is not time to move to production yet"
