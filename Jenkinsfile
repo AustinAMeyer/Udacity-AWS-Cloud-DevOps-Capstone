@@ -146,7 +146,7 @@ pipeline {
             steps {
                 withAWS(region: 'us-west-2', credentials: 'AWSCLICredentials') {
                 sh '''
-                    if ["$MoveToProduction" = "True"]
+                    if [ "$MoveToProduction" == "True" ]
                     then
                         aws eks --region us-west-2 update-kubeconfig \
                         --name Kubernetes-Capstone-Project
@@ -166,7 +166,7 @@ pipeline {
             steps{
                 withAWS(region: 'us-west-2', credentials: 'AWSCLICredentials'){
                     sh '''
-                        if ["$MoveToProduction" = "True"]
+                        if [ "$MoveToProduction" == "True" ]
                         then
                             kubectl apply -f ./Green/serviceGreen.yaml
                             kubectl get services
