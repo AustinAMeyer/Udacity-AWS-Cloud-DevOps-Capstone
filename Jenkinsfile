@@ -31,7 +31,23 @@ pipeline {
             }
         stage('Clean Up Blue Image') {
                 steps { 
-                    sh 'docker rmi austinmeyer/udacity-devops-capstone-blue'
+                    sh '''
+                        docker rmi austinmeyer/udacity-devops-capstone-blue
+                        #Kills off services that are left over
+                        systemctl stop udacity-devops-capstone-blue
+                        systemctl disable udacity-devops-capstone-blue
+                        rm /etc/systemd/system/udacity-devops-capstone-blue
+                        rm /etc/systemd/system/udacity-devops-capstone-blue
+                        rm /usr/lib/systemd/system/udacity-devops-capstone-blue
+                        rm /usr/lib/systemd/system/udacity-devops-capstone-blue
+                        systemctl daemon-reload
+                        systemctl reset-failed
+                        #cleans out the nodes for failed attempts
+                        ARRAY=(`kubectl get pods -o wide | grep <nodename>`)
+                        for i in "${ARRAY}"
+                        kubectl drain $i
+                        done
+                       '''
                 }
             }
         stage('Clean Up Green Image') {
