@@ -17,9 +17,7 @@ pipeline {
             }   
         stage('Lint Blue Deployment Dockerfile') {
                 steps {
-                    script {
-                        'hadolint ./GreenDeployment/Dockerfile'
-                    }    
+                       sh 'hadolint ./BlueDeployment/Dockerfile'   
                 }
             }
         stage('Lint Green Deployment Dockerfile') {
@@ -36,16 +34,17 @@ pipeline {
                         cd ./BlueDeployment
                         ls
                         docker build --tag=udacity_aws_cloud_devops_capstone_blue .
-                        cd ..
                     '''
                 }
             }
         stage('Push Blue Image') {
             steps {
                 sh '''
-                    dockerpath=austinmeyer/udacity_aws_cloud_devops_capstone_blue
+                    dockerpathblue=austinmeyer/udacity_aws_cloud_devops_capstone_blue
                     docker login -u austinmeyer --password $DockerPassword
-                    docker tag udacity_aws_cloud_devops_capstone_blue $dockerpath
+                    docker tag udacity_aws_cloud_devops_capstone_blue $dockerpathblue
+                    docker image push $dockerpathblue
+                    cd ..
                     '''
             }
         }
@@ -84,7 +83,6 @@ pipeline {
                     cd ./GreenDeployment
                     ls
                     docker build --tag=udacity_aws_cloud_devops_capstone_green .
-                    cd ..
                    '''
             }
         }
@@ -92,9 +90,11 @@ pipeline {
         stage('Push Green Image') {
             steps {
                 sh '''
-                    dockerpath=austinmeyer/udacity_aws_cloud_devops_capstone_green
+                    dockerpathgreen=austinmeyer/udacity_aws_cloud_devops_capstone_green
                     docker login -u austinmeyer --password $DockerPassword
-                    docker tag udacity_aws_cloud_devops_capstone_green $dockerpath
+                    docker tag udacity_aws_cloud_devops_capstone_green $dockerpathgreen
+                    docker image push $dockerpathgreen
+                    cd ..
                     '''
             }
         }
