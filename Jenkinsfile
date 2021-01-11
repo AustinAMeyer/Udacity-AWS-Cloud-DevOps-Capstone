@@ -34,6 +34,7 @@ pipeline {
                         else
                             echo "Dockerfile is free of errors. Moving on to the next step"
                         fi
+                        hadolint ./BlueDeployment/Dockerfile
                        '''
                 }
                     }
@@ -55,6 +56,7 @@ pipeline {
                         else
                             echo "Dockerfile is free of errors. Moving on to the next step"
                         fi
+                        hadolint ./GreenDeployment/Dockerfile
                        '''
                 }
                     }
