@@ -24,8 +24,8 @@ pipeline {
             }
                 steps {
                     sh '''
-                        hadolint ./BlueDeployment/Dockerfile | tee -a docker_lint.txt
-                        checkLint=`stat --printf="%s"  docker_lint.txt`
+                        hadolint ./BlueDeployment/Dockerfile | tee -a docker_lint_blue.txt
+                        checkLint=`stat --printf="%s"  docker_lint_blue.txt`
                                 
                         if [ "$checkLint" -gexit "0" ]; then
                             echo "Error exiting the workflow"
@@ -45,8 +45,8 @@ pipeline {
                 steps {
                     script {
                         '''
-                       hadolint ./GreenDeployment/Dockerfile | tee -a docker_lint.txt
-                        checkLint=`stat --printf="%s"  docker_lint.txt`
+                       hadolint ./GreenDeployment/Dockerfile | tee -a docker_lint_green.txt
+                        checkLint=`stat --printf="%s"  docker_lint_green.txt`
                                 
                         if [ "$checkLint" -gexit "0" ]; then
                             echo "Error exiting the workflow"
