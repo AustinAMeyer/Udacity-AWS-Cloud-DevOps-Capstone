@@ -29,6 +29,15 @@ pipeline {
                     }    
                 }
             }
+        stage('Clean Up Blue Image'){
+            steps { 
+                sh 'docker rmi austinmeyer/udacity-devops-capstone-blue'
+            }
+        stage('Clean Up Blue Image'){
+            steps { 
+                sh 'docker rmi austinmeyer/udacity-devops-capstone-green'
+            }
+        }
         stage('Build Blue Deployment Docker Image') {
                 steps {
                     sh '''
@@ -115,13 +124,18 @@ pipeline {
             steps {
                 withAWS(region: 'us-west-2', credentials: 'AWSCLICredentials') {
                 sh '''
-                    aws eks --region us-west-2 update-kubeconfig \
-                    --name Kubernetes-Capstone
-                    kubectl config use-context arn:aws:eks:us-west-2:257587651812:cluster/Kubernetes-Capstone
-                    kubectl apply -f ./GreenDeployment/deployGreen.yml
-                    kubectl get nodes
-                    kubectl get deployment
-                    kubectl get pod -o wide
+                    if ["$MoveToProduction" == "True"]
+                    then
+                        aws eks --region us-west-2 update-kubeconfig \
+                        --name Kubernetes-Capstone
+                        kubectl config use-context arn:aws:eks:us-west-2:257587651812:cluster/Kubernetes-Capstone
+                        kubectl apply -f ./GreenDeployment/deployGreen.yml
+                        kubectl get nodes
+                        kubectl get deployment
+                        kubectl get pod -o wide
+                    else
+                        echo "It is not time to move to production yet"
+                    fi
                    '''
                 }
             }
