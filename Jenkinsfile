@@ -17,7 +17,9 @@ pipeline {
             }   
         stage('Lint Blue Deployment Dockerfile') {
                 steps {
-                       sh 'hadolint ./BlueDeployment/Dockerfile'   
+                    script {
+                       'hadolint ./BlueDeployment/Dockerfile'   
+                    }
                 }
             }
         stage('Lint Green Deployment Dockerfile') {
