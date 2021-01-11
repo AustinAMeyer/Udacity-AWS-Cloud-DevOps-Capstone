@@ -56,7 +56,7 @@ pipeline {
                     sh '''
                         aws eks update-kubeconfig\
                         --region us-west-2 \
-                        --name Kubernetes-Capstone
+                        --name Kubernetes-Capstone-Project
                        '''
                 }
             }
@@ -106,7 +106,7 @@ pipeline {
                     sh '''
                         aws eks update-kubeconfig \
                         --region us-west-2 \
-                        --name Kubernetes-Capstone
+                        --name Kubernetes-Capstone-Project
                        '''
                 }
             }
