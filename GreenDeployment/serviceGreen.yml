@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: udacity-devops-capstone
   labels:
-    app: udacity-devops-capstone
+    app: udacity-devops-capstone-green
 spec:
   type: LoadBalancer
   selector:
-    app: udacity-devops-capstone
+    app: udacity-devops-capstone-green
   ports:
     - port: 80
       targetPort: 80
