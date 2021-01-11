@@ -1,0 +1,2 @@
+GitHub Repo: https://github.com/AustinAMeyer/Udacity-AWS-Cloud-DevOps-Capstone
+Link to working Webpage: http://a1e7ff12588bd47a2a4561ca85dd3ceb-426913369.us-west-2.elb.amazonaws.com:80
