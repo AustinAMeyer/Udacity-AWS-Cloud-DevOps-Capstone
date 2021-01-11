@@ -35,16 +35,16 @@ pipeline {
                         ls
                         cd ./BlueDeployment
                         ls
-                        docker build --tag=udacity_aws_cloud_devops_capstone_blue .
+                        docker build --tag=udacity-devops-capstone-blue .
                     '''
                 }
             }
         stage('Push Blue Image') {
             steps {
                 sh '''
-                    dockerpathblue=austinmeyer/udacity_aws_cloud_devops_capstone_blue
+                    dockerpathblue=austinmeyer/udacity-devops-capstone-blue
                     docker login -u austinmeyer --password $DockerPassword
-                    docker tag udacity_aws_cloud_devops_capstone_blue $dockerpathblue
+                    docker tag udacity-devops-capstone-blue $dockerpathblue
                     docker image push $dockerpathblue
                     cd ..
                     '''
@@ -84,7 +84,7 @@ pipeline {
                     ls
                     cd ./GreenDeployment
                     ls
-                    docker build --tag=udacity_aws_cloud_devops_capstone_green .
+                    docker build --tag=udacity-devops-capstone-green .
                    '''
             }
         }
@@ -92,9 +92,9 @@ pipeline {
         stage('Push Green Image') {
             steps {
                 sh '''
-                    dockerpathgreen=austinmeyer/udacity_aws_cloud_devops_capstone_green
+                    dockerpathgreen=austinmeyer/udacity-devops-capstone-green
                     docker login -u austinmeyer --password $DockerPassword
-                    docker tag udacity_aws_cloud_devops_capstone_green $dockerpathgreen
+                    docker tag udacity-devops-capstone-green $dockerpathgreen
                     docker image push $dockerpathgreen
                     cd ..
                     '''

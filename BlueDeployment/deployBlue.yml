@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: kubernetes-capstone-blue
-          image: austinmeyer/udacity_aws_cloud_devops_capstone_blue
+          image: austinmeyer/udacity-devops-capstone-blue
           imagePullPolicy: "Always"
           ports:
             - containerPort: 8080
