@@ -34,14 +34,7 @@ pipeline {
                     sh '''
                         docker rmi austinmeyer/udacity-devops-capstone-blue
                         #Kills off services that are left over
-                        systemctl stop udacity-devops-capstone-blue
-                        systemctl disable udacity-devops-capstone-blue
-                        rm /etc/systemd/system/udacity-devops-capstone-blue
-                        rm /etc/systemd/system/udacity-devops-capstone-blue
-                        rm /usr/lib/systemd/system/udacity-devops-capstone-blue
-                        rm /usr/lib/systemd/system/udacity-devops-capstone-blue
-                        systemctl daemon-reload
-                        systemctl reset-failed
+                        docker service rm udacity-devops-capstone-blue
                         #cleans out the nodes for failed attempts
                         ARRAY=(`kubectl get pods -o wide | grep <nodename>`)
                         for i in "${ARRAY}"
