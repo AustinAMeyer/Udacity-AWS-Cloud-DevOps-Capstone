@@ -20,7 +20,6 @@ pipeline {
             docker {
                image 'hadolint/hadolint:latest-debian'
                     }
-                }
                 steps {
                     sh '''
                         hadolint ./BlueDeployment/Dockerfile | tee -a docker_lint.txt
@@ -37,6 +36,9 @@ pipeline {
                 }
                     }
         stage('Lint Green Deployment Dockerfile') {
+            docker {
+               image 'hadolint/hadolint:latest-debian'
+                    }
                 steps {
                     script {
                         '''
