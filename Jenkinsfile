@@ -18,14 +18,36 @@ pipeline {
         stage('Lint Blue Deployment Dockerfile') {
                 steps {
                     script {
-                       'hadolint ./BlueDeployment/Dockerfile'   
+                       '''
+                       LINT=`hadolint ./BlueDeployment/Dockerfile`
+                       hadolint ./BlueDeployment/Dockerfile
+
+                       if LINT | grep -q "ERROR: script returned exit code 1"
+                       then
+                        echo "Lint failed"
+                        exit 1
+                       else
+                        echo "pass"
+                       fi
+                       '''
                     }
                 }
             }
         stage('Lint Green Deployment Dockerfile') {
                 steps {
                     script {
-                        'hadolint ./GreenDeployment/Dockerfile'
+                        '''
+                       LINT=`hadolint ./GreenDeployment/Dockerfile`
+                       hadolint ./GreenDeployment/Dockerfile
+
+                       if LINT | grep -q "ERROR: script returned exit code 1"
+                       then
+                        echo "Lint failed"
+                        exit 1
+                       else
+                        echo "pass"
+                       fi
+                       '''
                     }    
                 }
             }
