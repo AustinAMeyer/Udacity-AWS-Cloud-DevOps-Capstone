@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: udacity-devops-capstone-green
-          image: austinmeyer/udacity-devops-capstone-green
+          image: austinmeyer/udacity-devops-capstone-green:latest
           imagePullPolicy: "Always"
           ports:
             - containerPort: 8080

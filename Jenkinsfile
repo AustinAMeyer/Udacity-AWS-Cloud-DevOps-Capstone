@@ -32,7 +32,7 @@ pipeline {
         stage('Clean Up Blue Image') {
                 steps { 
                     sh '''
-                        #docker rmi austinmeyer/udacity-devops-capstone-blue
+                        docker rmi austinmeyer/udacity-devops-capstone-blue
                        '''
                 }
             }
