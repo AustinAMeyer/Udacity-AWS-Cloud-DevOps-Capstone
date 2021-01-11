@@ -87,7 +87,7 @@ pipeline {
                     sh '''
                         aws eks update-kubeconfig\
                         --region us-west-2 \
-                        --name Kubernetes-Capstone-Project
+                        --name Kubernetes-Capstone-Project1
                        '''
                 }
             }
@@ -97,8 +97,8 @@ pipeline {
                 withAWS(region: 'us-west-2', credentials: 'AWSCLICredentials') {
                 sh '''
                         aws eks --region us-west-2 update-kubeconfig \
-                        --name Kubernetes-Capstone-Project
-                        kubectl config use-context arn:aws:eks:us-west-2:257587651812:cluster/Kubernetes-Capstone-Project
+                        --name Kubernetes-Capstone-Project1
+                        kubectl config use-context arn:aws:eks:us-west-2:257587651812:cluster/Kubernetes-Capstone-Project1
                         kubectl apply -f ./BlueDeployment/deployBlue.yml
                         kubectl apply -f ./BlueDeployment/service.yml
                         kubectl get nodes
@@ -137,7 +137,7 @@ pipeline {
                     sh '''
                         aws eks update-kubeconfig \
                         --region us-west-2 \
-                        --name Kubernetes-Capstone-Project
+                        --name Kubernetes-Capstone-Project1
                        '''
                 }
             }
@@ -149,8 +149,8 @@ pipeline {
                     if [ "$MoveToProduction" == "True" ]
                     then
                         aws eks --region us-west-2 update-kubeconfig \
-                        --name Kubernetes-Capstone-Project
-                        kubectl config use-context arn:aws:eks:us-west-2:257587651812:cluster/Kubernetes-Capstone-Project
+                        --name Kubernetes-Capstone-Project1
+                        kubectl config use-context arn:aws:eks:us-west-2:257587651812:cluster/Kubernetes-Capstone-Project1
                         kubectl apply -f ./GreenDeployment/deployGreen.yml
                         kubectl get nodes
                         kubectl get deployment
