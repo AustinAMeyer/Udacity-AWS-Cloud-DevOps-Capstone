@@ -102,7 +102,7 @@ pipeline {
                         --name Kubernetes-Capstone-Project
                         kubectl config use-context arn:aws:eks:us-west-2:257587651812:cluster/Kubernetes-Capstone-Project
                         kubectl apply -f ./BlueDeployment/deployBlue.yml
-                        kubectl apply -f ./BlueDeployment/serviceBlue.yml
+                        kubectl apply -f ./BlueDeployment/service.yml
                         kubectl get nodes
                         kubectl get deployment
                         kubectl get pod -o wide
@@ -167,13 +167,13 @@ pipeline {
                 }
             }
         }
-        stage('Switch Traffic To Green Deployment from blue'){
+        stage('Change traffic from blue to green'){
             steps{
                 withAWS(region: 'us-west-2', credentials: 'AWSCLICredentials'){
                     sh '''
                         if [ "$MoveToProduction" == "True" ]
                         then
-                            kubectl apply -f ./GreenDeployment/serviceGreen.yml
+                            kubectl edit-last-applied -f ./GreenDeployment/service.yml
                             kubectl get services
                         else
                             echo "It is not time to move to production yet"
