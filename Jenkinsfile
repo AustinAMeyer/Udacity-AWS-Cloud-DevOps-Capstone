@@ -25,9 +25,9 @@ pipeline {
                 steps {
                     sh '''
                         hadolint ./BlueDeployment/Dockerfile | tee -a docker_lint_blue.txt
-                        checkLint=`stat --printf="%s"  docker_lint_blue.txt`
+                        checkLintBlue=`stat --printf="%s"  docker_lint_blue.txt`
                                 
-                        if [ "$checkLint" -gexit "0" ]; then
+                        if [ "$checkLintBlue" -gexit "0" ]; then
                             echo "Error exiting the workflow"
                             exit 1
                         else
@@ -43,21 +43,19 @@ pipeline {
                 }
             }
                 steps {
-                    script {
-                        '''
-                       hadolint ./GreenDeployment/Dockerfile | tee -a docker_lint_green.txt
-                        checkLint=`stat --printf="%s"  docker_lint_green.txt`
+                    sh '''
+                        hadolint ./GreenDeployment/Dockerfile | tee -a docker_lint_green.txt
+                        checkLintGreen=`stat --printf="%s"  docker_lint_green.txt`
                                 
-                        if [ "$checkLint" -gexit "0" ]; then
+                        if [ "$checkLintGreen" -gexit "0" ]; then
                             echo "Error exiting the workflow"
                             exit 1
                         else
                             echo "Dockerfile is free of errors. Moving on to the next step"
                         fi
                        '''
-                    }    
                 }
-            }
+                    }
         stage('Build Blue Deployment Docker Image') {
                 steps {
                     sh '''
