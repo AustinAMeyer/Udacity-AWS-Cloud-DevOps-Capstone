@@ -173,7 +173,7 @@ pipeline {
                     sh '''
                         if [ "$MoveToProduction" == "True" ]
                         then
-                            kubectl edit-last-applied -f ./GreenDeployment/service.yml
+                            kubectl apply -f ./GreenDeployment/service.yml
                             kubectl get services
                         else
                             echo "It is not time to move to production yet"
