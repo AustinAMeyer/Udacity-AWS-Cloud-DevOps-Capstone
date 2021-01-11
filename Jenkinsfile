@@ -20,7 +20,7 @@ pipeline {
                     script {
                        '''
                        LINT=`hadolint ./BlueDeployment/Dockerfile`
-                       hadolint ./BlueDeployment/Dockerfile
+                       
 
                        if LINT | grep -q "ERROR: script returned exit code 1"
                        then
@@ -29,6 +29,7 @@ pipeline {
                        else
                         echo "pass"
                        fi
+                       hadolint ./BlueDeployment/Dockerfile
                        '''
                     }
                 }
@@ -38,7 +39,7 @@ pipeline {
                     script {
                         '''
                        LINT=`hadolint ./GreenDeployment/Dockerfile`
-                       hadolint ./GreenDeployment/Dockerfile
+                       
 
                        if LINT | grep -q "ERROR: script returned exit code 1"
                        then
@@ -47,6 +48,7 @@ pipeline {
                        else
                         echo "pass"
                        fi
+                       hadolint ./GreenDeployment/Dockerfile
                        '''
                     }    
                 }
