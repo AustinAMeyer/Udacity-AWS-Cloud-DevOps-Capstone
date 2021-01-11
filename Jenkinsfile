@@ -29,18 +29,6 @@ pipeline {
                     }    
                 }
             }
-        stage('Clean Up Blue Image') {
-                steps { 
-                    sh '''
-                        docker rmi austinmeyer/udacity-devops-capstone-blue
-                       '''
-                }
-            }
-        stage('Clean Up Green Image') {
-                steps { 
-                    sh 'docker rmi austinmeyer/udacity-devops-capstone-green'
-                }
-            }
         stage('Build Blue Deployment Docker Image') {
                 steps {
                     sh '''
